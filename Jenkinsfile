@@ -87,17 +87,32 @@ pipeline{
       //      }
       //    }
        // }
+  //      stage('Artifact Push : jfrog') {
+  //      when {  expression { params.action == 'create' } }
+  //          steps {
+  //              script {
+  //          sh "/usr/bin/jf rt upload",
+  //             "--url http://3.82.214.121:8081/artifactory/example-repo-local/",
+   //            "--access-token ${ARTIFACTORY_ACCESS_TOKEN}",
+    //           "target/kubernetes-configmap-reload-0.0.1-SNAPSHOT.jar"
+    //                }
+    //            }
+   //         } 
         stage('Artifact Push : jfrog') {
-        when {  expression { params.action == 'create' } }
-            steps {
-                script {
-            sh "/usr/bin/jf rt upload",
-               "--url http://3.82.214.121:8081/artifactory/example-repo-local/",
-               "--access-token ${ARTIFACTORY_ACCESS_TOKEN}",
-               "target/kubernetes-configmap-reload-0.0.1-SNAPSHOT.jar"
-                    }
-                }
-            }        
+    when {
+        expression { params.action == 'create' }
+    }
+    steps {
+        script {
+            def jfCommand = "/usr/bin/jf rt upload"
+            def urlOption = "--url http://3.82.214.121:8082/artifactory/example-repo-local/"
+            def tokenOption = "--access-token ${ARTIFACTORY_ACCESS_TOKEN}"
+            def fileOption = "target/kubernetes-configmap-reload-0.0.1-SNAPSHOT.jar"
+
+            sh(script: "${jfCommand} ${urlOption} ${tokenOption} ${fileOption}", returnStatus: true)
+        }
+    }
+}
         stage('Docker Image Build'){
          when { expression {  params.action == 'create' } }
             steps{
