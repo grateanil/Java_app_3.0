@@ -80,8 +80,10 @@ pipeline{
         stage('Artifact Push : jfrog'){
          when { expression {  params.action == 'create' } }
             steps {
-            sh 'jf rt upload --url http://3.82.214.121:8081/artifactory --access-token ${ARTIFACTORY_ACCESS_TOKEN} target/kubernetes-configmap-reload-0.0.1-SNAPSH
-OT.jar java-web-app/'
+            sh '''
+                jf rt upload --url http://3.82.214.121:8081/artifactory --access-token ${ARTIFACTORY_ACCESS_TOKEN} target/kubernetes-configmap-reload-0.0.1-SNAPSH
+OT.jar java-web-app/
+             '''
             }
         }
         stage('Docker Image Build'){
