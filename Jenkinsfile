@@ -105,11 +105,11 @@ pipeline{
     steps {
         script {
             def jfCommand = "/usr/bin/jf rt upload"
-            def urlOption = "--url http://3.82.214.121:8082/artifactory/example-repo-local/"
+            def urlOption = "--url http://3.82.214.121:8082/artifactory/"
             def tokenOption = "--access-token ${ARTIFACTORY_ACCESS_TOKEN}"
             def fileOption = "target/kubernetes-configmap-reload-0.0.1-SNAPSHOT.jar"
 
-            sh(script: "${jfCommand} ${urlOption} ${tokenOption} ${fileOption}", returnStatus: true)
+            sh(script: "${jfCommand} ${urlOption} ${tokenOption} ${fileOption} java-web-app/", returnStatus: true)
         }
     }
 }
