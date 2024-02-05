@@ -82,7 +82,7 @@ pipeline{
     //       steps {
    //           script{
     //        sh """
-     //           /usr/bin/jf rt upload --url http://3.82.214.121:8082/artifactory/example-repo-local/ --access-token \${ARTIFACTORY_ACCESS_TOKEN} target/kubernetes-configmap-reload-0.0.1-SNAPSHOT.jar
+     //           /usr/bin/jf rt upload --url http://3.82.214.121:8081/artifactory/example-repo-local/ --access-token \${ARTIFACTORY_ACCESS_TOKEN} target/kubernetes-configmap-reload-0.0.1-SNAPSHOT.jar
       //       """
       //      }
       //    }
@@ -92,7 +92,7 @@ pipeline{
             steps {
                 script {
             sh "/usr/bin/jf rt upload",
-               "--url http://3.82.214.121:8082/artifactory/example-repo-local/",
+               "--url http://3.82.214.121:8081/artifactory/example-repo-local/",
                "--access-token ${ARTIFACTORY_ACCESS_TOKEN}",
                "target/kubernetes-configmap-reload-0.0.1-SNAPSHOT.jar"
                     }
